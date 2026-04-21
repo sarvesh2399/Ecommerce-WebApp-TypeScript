@@ -30,8 +30,8 @@ export const Header = ({ cart, setSearchQuery, searchQuery }: Props) => {
 
               <img
                 className="logo-image"
-                src="/images/diamond.png"
-              // src="/images/diamond.png"
+                src="images/diamond.png"
+              // src="images/diamond.png"
                 alt="logo"
               />
             </div>
@@ -50,7 +50,7 @@ export const Header = ({ cart, setSearchQuery, searchQuery }: Props) => {
           />
 
           <button className="search-button">
-            <img className="search-icon" src="/images/icons/search-icon.png" />
+            <img className="search-icon" src="images/icons/search-icon.png" />
           </button>
         </div>
 
@@ -60,7 +60,7 @@ export const Header = ({ cart, setSearchQuery, searchQuery }: Props) => {
           </Link>
 
           <Link className="cart-link header-link" to="/checkout">
-            <img className="cart-icon" src="/images/icons/cart-icon.png" />
+            <img className="cart-icon" src="images/icons/cart-icon.png" />
             <div className="cart-quantity">{totalQuantity}</div>
             <div className="cart-text">Cart</div>
           </Link>

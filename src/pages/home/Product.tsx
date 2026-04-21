@@ -52,7 +52,7 @@ export const Product = ({ product, loadCart }: Props) => {
         <div className="product-rating-container">
           <img
             className="product-rating-stars"
-            src={`/images/ratings/rating-${product.rating.stars * 10}.png`}
+            src={`images/ratings/rating-${product.rating.stars * 10}.png`}
           />
           <div className="product-rating-count link-primary">
             {product.rating.count}
@@ -70,7 +70,7 @@ export const Product = ({ product, loadCart }: Props) => {
 
         {showAdded && (
           <div className="added-to-cart">
-            <img src="/images/icons/checkmark.png" />
+            <img src="images/icons/checkmark.png" />
             Added
           </div>
         )}
