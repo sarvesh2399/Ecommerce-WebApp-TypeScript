@@ -1,73 +1,121 @@
-# React + TypeScript + Vite
+# Ecommerce WebApp (TypeScript) 🛒
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 📌 About the Project
 
-Currently, two official plugins are available:
+This project is a TypeScript version of my eCommerce web application. It is similar to platforms like Amazon or Flipkart, where users can browse products, add them to cart, place orders, and track deliveries.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+The main goal of this version was to learn and implement TypeScript in a real-world full-stack application and improve code quality and maintainability.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🚀 Features
 
-## Expanding the ESLint configuration
+* Browse and search products using keywords
+* Add products to cart
+* Update or remove items from cart
+* Choose delivery preferences (like delivery date)
+* Place orders
+* View order history
+* Track order status
+* Full CRUD operations
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🛠️ Tech Stack
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+* Frontend: React, TypeScript, HTML, CSS
+* Backend: Node.js, Express
+* Database: SQL (AWS RDS)
+* Deployment: AWS (Elastic Beanstalk, EC2, S3)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
+
+## 🌐 Deployment Details
+
+* Frontend and backend deployed separately on AWS Elastic Beanstalk
+* Database hosted on AWS SQL service (RDS)
+* Used S3 for storage
+* Configured load balancing and routing (Route 53)
+* SSL setup for HTTPS (later removed due to free tier limits)
+
+---
+
+## 🌐 Live Demo
+
+The application is live and can be accessed from the link in the repository description.
+
+---
+
+## ⚙️ How It Works
+
+* User searches or browses products
+* Adds items to cart
+* Updates cart and selects delivery preferences
+* Places order
+* Tracks order and checks order history
+
+---
+
+## 💻 How to Run Locally
+
+### 1. Clone the repository
+
+```bash id="t1a9vx"
+git clone https://github.com/sarvesh2399/ecommerce-webapp-typescript.git
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. Go to project folder
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash id="m4q2ls"
+cd ecommerce-webapp-typescript
 ```
+
+---
+
+### 3. Setup Frontend
+
+```bash id="k8z1dp"
+npm install
+npm run dev
+```
+
+---
+
+### 4. Setup Backend
+
+```bash id="r7w3hn"
+The backend has not yet been added to my GitHub repository
+```
+
+---
+
+## 📚 What I Learned
+
+* Using TypeScript in a full-stack application
+* Writing type-safe APIs and frontend components
+* Better project structure and maintainability
+* Integration of multiple services (frontend, backend, database)
+* AWS deployment and configuration
+
+---
+
+## 🔄 Difference from JavaScript Version
+
+* Added TypeScript for type safety
+* Improved code readability and structure
+* Reduced runtime errors with better type checking
+
+---
+
+## 🔮 Future Improvements
+
+* Add payment integration
+* Improve UI/UX
+* Add authentication system
+* Enhance performance and caching
+
+---
+
+## 🙌 Contribution
+
+Feel free to fork and improve this project. Suggestions are always welcome!
