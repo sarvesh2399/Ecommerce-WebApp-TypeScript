@@ -9,7 +9,7 @@ import axios from "axios";
 
 function App() {
   const [cart, setCart] = useState([]);
-
+  const [searchQuery, setSearchQuery] = useState("");
   const loadCart = async () => {
     try {
       const response = await axios.get("/api/cart-items?expand=product");
@@ -26,12 +26,7 @@ function App() {
       <Routes>
         <Route
           path="/"
-          element={
-            <HomePage
-              cart={cart}
-              loadCart={loadCart}
-            />
-          }
+          element={<HomePage cart={cart} loadCart={loadCart} />}
         />
         <Route
           path="checkout"
@@ -43,7 +38,13 @@ function App() {
         />
         <Route
           path="tracking/:orderId/:productId"
-          element={<TrackingPage cart={cart} />}
+          element={
+            <TrackingPage
+              cart={cart}
+              searchQuery={searchQuery}
+              setSearchQuery={setSearchQuery}
+            />
+          }
         />
       </Routes>
     </>

@@ -3,7 +3,21 @@ import React, { useState } from "react";
 import { formatMoney } from "../../utils/money";
 import { ProductQuantityContainer } from "../../components/home/ProductQuantityContainer";
 
-export const Product = ({ product, loadCart }) => {
+type Props = {
+  product: {
+    id: string | number;
+    name: string;
+    image: string;
+    priceCents: number;
+    rating: {
+      stars: number;
+      count: number;
+    };
+  };
+  loadCart: () => Promise<void>;
+};
+
+export const Product = ({ product, loadCart }: Props) => {
   const [quantity, setQuantity] = useState(1);
   const [showAdded, setShowAdded] = useState(false);
 
@@ -21,10 +35,9 @@ export const Product = ({ product, loadCart }) => {
     }, 2000);
   };
 
-  const selectQuantity = (event) => {
+  const selectQuantity = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const quantitySelected = Number(event.target.value);
     setQuantity(quantitySelected);
-    // console.log(quantitySelected)
   };
 
   return (

@@ -1,6 +1,11 @@
 import React from "react";
 
-export const ProductQuantityContainer = ({quantity, selectQuantity}) => {
+type Props = {
+  quantity: number;
+  selectQuantity: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+};
+
+export const ProductQuantityContainer = ({ quantity, selectQuantity }: Props) => {
   return (
     <>
       <div className="product-quantity-container">

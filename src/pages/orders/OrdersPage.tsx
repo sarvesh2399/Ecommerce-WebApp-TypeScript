@@ -6,8 +6,28 @@ import axios from "axios";
 import dayjs from "dayjs";
 import { formatMoney } from "../../utils/money";
 
-export const OrdersPage = ({ cart, loadCart }) => {
-  const [orders, setOrders] = useState([]);
+type Props = {
+  cart: { quantity: number }[];
+  loadCart: () => Promise<void>;
+};
+
+type OrderType = {
+  id: string | number;
+  orderTimeMs: number;
+  totalCostCents: number;
+  products: {
+    product: {
+      id: string | number;
+      name: string;
+      image: string;
+    };
+    quantity: number;
+    estimatedDeliveryTimeMs: number;
+  }[];
+};
+
+export const OrdersPage = ({ cart, loadCart }: Props) => {
+  const [orders, setOrders] = useState<OrderType[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
@@ -28,11 +48,12 @@ export const OrdersPage = ({ cart, loadCart }) => {
       const query = searchQuery.toLowerCase();
 
       if (productName.includes(query)) {
-        return true; // keep this order
+        return true;
       }
     }
-    return false; // remove this order
+    return false;
   });
+
   return (
     <>
       <title>Orders</title>
@@ -76,6 +97,7 @@ export const OrdersPage = ({ cart, loadCart }) => {
                       });
                       await loadCart();
                     };
+
                     return (
                       <Fragment key={orderProduct.product.id}>
                         <div className="product-image-container">
@@ -87,9 +109,9 @@ export const OrdersPage = ({ cart, loadCart }) => {
                             {orderProduct.product.name}
                           </div>
                           <div className="product-delivery-date">
-                            Arriving on:{" "}
+                            Arriving on{" "}
                             {dayjs(orderProduct.estimatedDeliveryTimeMs).format(
-                              "MMMM D",
+                              "MMMM D"
                             )}
                           </div>
                           <div className="product-quantity">

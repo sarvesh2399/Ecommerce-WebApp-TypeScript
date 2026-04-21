@@ -7,11 +7,42 @@ import { formatMoney } from "../../utils/money";
 import dayjs from "dayjs";
 import { UpdateQuantity } from "../../components/checkout/UpdateQuantity";
 
-export const CheckoutPage = ({ cart, loadCart }) => {
-  const [deliveryOptions, setDeliveryOptions] = useState([]);
-  const [paymentSummary, setPaymentSummary] = useState(null);
-  // console.log(cart)
+type Props = {
+  cart: {
+    id: string | number;
+    productId: string | number;
+    quantity: number;
+    deliveryOptionId: string | number;
+    product: {
+      name: string;
+      image: string;
+      priceCents: number;
+    };
+  }[];
+  loadCart: () => Promise<void>;
+};
+
+type DeliveryOptionType = {
+  id: string | number;
+  priceCents: number;
+  estimatedDeliveryTimeMs: number;
+};
+
+type PaymentSummaryType = {
+  totalItems: number;
+  productCostCents: number;
+  shippingCostCents: number;
+  totalCostBeforeTaxCents: number;
+  taxCents: number;
+  totalCostCents: number;
+};
+
+export const CheckoutPage = ({ cart, loadCart }: Props) => {
+  const [deliveryOptions, setDeliveryOptions] = useState<DeliveryOptionType[]>([]);
+  const [paymentSummary, setPaymentSummary] = useState<PaymentSummaryType | null>(null);
+
   const navigate = useNavigate();
+
   const createOrder = async () => {
     await axios.post("/api/orders");
     await loadCart();
@@ -21,9 +52,7 @@ export const CheckoutPage = ({ cart, loadCart }) => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const deliveryOptionsRes = await axios.get(
-          "/api/delivery-options?expand=estimatedDeliveryTime",
-        );
+        const deliveryOptionsRes = await axios.get("/api/delivery-options?expand=estimatedDeliveryTime");
         setDeliveryOptions(deliveryOptionsRes.data);
       } catch (err) {
         console.error(err);
@@ -40,8 +69,6 @@ export const CheckoutPage = ({ cart, loadCart }) => {
     getPaymentSummary();
   }, [cart]);
 
-  // const [quantity, setQuantity] = useState(cartItem.quantity);
-
   return (
     <>
       <title>Checkout</title>
@@ -57,8 +84,9 @@ export const CheckoutPage = ({ cart, loadCart }) => {
                 const selectedDeliveryOption = deliveryOptions.find(
                   (deliveryOption) => {
                     return deliveryOption.id === cartItem.deliveryOptionId;
-                  },
+                  }
                 );
+
                 const deleteCartItem = async () => {
                   await axios.delete(`api/cart-items/${cartItem.productId}`);
                   await loadCart();
@@ -69,7 +97,7 @@ export const CheckoutPage = ({ cart, loadCart }) => {
                     <div className="delivery-date">
                       Delivery date:{" "}
                       {dayjs(
-                        selectedDeliveryOption.estimatedDeliveryTimeMs,
+                        selectedDeliveryOption?.estimatedDeliveryTimeMs
                       ).format("dddd, MMMM D")}
                     </div>
 
@@ -87,13 +115,12 @@ export const CheckoutPage = ({ cart, loadCart }) => {
                         <div className="product-price">
                           {formatMoney(cartItem.product.priceCents)}
                         </div>
+
                         <div className="product-quantity">
-                          <span
-                            style={{ display: "flex", alignItems: "center" }}
-                          >
-                            Quantity:{" "}
+                          <span style={{ display: "flex", alignItems: "center" }}>
+                            Quantity:
                             <span
-                              style={{ marginLeft: "10px", marginRight:"10px" }}
+                              style={{ marginLeft: "10px", marginRight: "10px" }}
                               className="quantity-label"
                             >
                               <UpdateQuantity
@@ -101,6 +128,7 @@ export const CheckoutPage = ({ cart, loadCart }) => {
                                 loadCart={loadCart}
                               />
                             </span>
+
                             <span
                               className="delete-quantity-link link-primary"
                               onClick={deleteCartItem}
@@ -116,21 +144,24 @@ export const CheckoutPage = ({ cart, loadCart }) => {
                         <div className="delivery-options-title">
                           Choose a delivery option:
                         </div>
+
                         {deliveryOptions.map((deliveryOption) => {
                           let priceString = "FREE Shipping";
+
                           if (deliveryOption.priceCents > 0) {
                             priceString = `${formatMoney(deliveryOption.priceCents)} - Shipping`;
                           }
+
                           const updateDeliveryOption = async () => {
                             await axios.put(
                               `api/cart-items/${cartItem.productId}`,
                               {
                                 deliveryOptionId: deliveryOption.id,
-                              },
+                              }
                             );
                             await loadCart();
                           };
-                          // console.log({deliveryOption})
+
                           return (
                             <div
                               key={deliveryOption.id}
@@ -141,18 +172,19 @@ export const CheckoutPage = ({ cart, loadCart }) => {
                                 onChange={() => {}}
                                 type="radio"
                                 checked={
-                                  deliveryOption.id ===
-                                  cartItem.deliveryOptionId
+                                  deliveryOption.id === cartItem.deliveryOptionId
                                 }
                                 className="delivery-option-input"
                                 name={`delivery-option-${cartItem.productId}`}
                               />
+
                               <div>
                                 <div className="delivery-option-date">
                                   {dayjs(
-                                    deliveryOption.estimatedDeliveryTimeMs,
+                                    deliveryOption.estimatedDeliveryTimeMs
                                   ).format("dddd, MMMM D")}
                                 </div>
+
                                 <div className="delivery-option-price">
                                   {priceString}
                                 </div>

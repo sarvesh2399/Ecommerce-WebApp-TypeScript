@@ -4,8 +4,24 @@ import axios from "axios";
 import "./HomePage.css";
 import { Product } from "./Product";
 
-export const HomePage = ({ cart, loadCart }) => {
-  const [products, setProducts] = useState([]);
+type Props = {
+  cart: { quantity: number }[];
+  loadCart: () => Promise<void>;
+};
+
+type ProductType = {
+  id: string | number;
+  name: string;
+  image: string;
+  priceCents: number;
+  rating: {
+    stars: number;
+    count: number;
+  };
+};
+
+export const HomePage = ({ cart, loadCart }: Props) => {
+  const [products, setProducts] = useState<ProductType[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {

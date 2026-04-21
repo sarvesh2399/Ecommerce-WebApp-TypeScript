@@ -1,8 +1,15 @@
 import { Link } from "react-router";
 import "./Header.css";
 
-export const Header = ({ cart, setSearchQuery, searchQuery }) => {
+type Props = {
+  cart: { quantity: number }[];
+  searchQuery: string;
+  setSearchQuery: (value: string) => void;
+};
+
+export const Header = ({ cart, setSearchQuery, searchQuery }: Props) => {
   let totalQuantity = 0;
+
   for (let i = 0; i < cart.length; i++) {
     totalQuantity += cart[i].quantity;
   }
@@ -18,7 +25,6 @@ export const Header = ({ cart, setSearchQuery, searchQuery }) => {
               setSearchQuery("");
             }}
           >
-            {/* <img style={{height:"45px", width : "100px"}} className="logo" src="../../public/images/logo1.png" /> */}
             <div className="logo-style">
               <h1 className="logo-text">SSP</h1>
 
@@ -37,13 +43,13 @@ export const Header = ({ cart, setSearchQuery, searchQuery }) => {
             type="text"
             placeholder="Search"
             value={searchQuery}
-            onChange={(event) => {
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
               setSearchQuery(event.target.value);
             }}
           />
 
           <button className="search-button">
-            <img className="search-icon" src="images/icons/search-icon.png" />
+            <img className="search-icon" src="/images/icons/search-icon.png" />
           </button>
         </div>
 
@@ -53,7 +59,7 @@ export const Header = ({ cart, setSearchQuery, searchQuery }) => {
           </Link>
 
           <Link className="cart-link header-link" to="/checkout">
-            <img className="cart-icon" src="images/icons/cart-icon.png" />
+            <img className="cart-icon" src="/images/icons/cart-icon.png" />
             <div className="cart-quantity">{totalQuantity}</div>
             <div className="cart-text">Cart</div>
           </Link>

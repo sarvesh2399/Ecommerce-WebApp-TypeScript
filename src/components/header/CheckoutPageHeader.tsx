@@ -1,9 +1,11 @@
-import React from "react";
 import { Link } from "react-router";
 import "./CheckoutPageHeader.css";
 
-export const CheckoutPageHeader = ({ cart }) => {
+type Props = {
+  cart: { quantity: number }[];
+};
 
+export const CheckoutPageHeader = ({ cart }: Props) => {
   return (
     <>
       <div className="checkout-header">
@@ -11,14 +13,14 @@ export const CheckoutPageHeader = ({ cart }) => {
           <div className="checkout-header-left-section">
             <Link className="header-logo-decoration" to="/">
               <div className="logo-style">
-              <h1 className="logo-text">SSP</h1>
+                <h1 className="logo-text">SSP</h1>
 
-              <img
-                className="logo-image"
-                src="../../public/images/diamond.png"
-                alt="logo"
-              />
-            </div>
+                <img
+                  className="logo-image"
+                  src="../../public/images/diamond.png"
+                  alt="logo"
+                />
+              </div>
             </Link>
           </div>
 
@@ -31,7 +33,7 @@ export const CheckoutPageHeader = ({ cart }) => {
           </div>
 
           <div className="checkout-header-right-section">
-            <img src="images/icons/checkout-lock-icon.png" />
+            <img src="/images/icons/checkout-lock-icon.png" />
           </div>
         </div>
       </div>
