@@ -1,5 +1,5 @@
 import { Header } from "../../components/header/Header";
-import React, { Fragment, useEffect, useState } from "react";
+import   { Fragment, useEffect, useState } from "react";
 import "./OrdersPage.css";
 import { Link } from "react-router";
 import axios from "axios";
