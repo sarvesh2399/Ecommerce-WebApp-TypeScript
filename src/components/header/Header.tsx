@@ -30,7 +30,8 @@ export const Header = ({ cart, setSearchQuery, searchQuery }: Props) => {
 
               <img
                 className="logo-image"
-                src="../../public/images/diamond.png"
+                src="/images/diamond.png"
+              // src="/images/diamond.png"
                 alt="logo"
               />
             </div>

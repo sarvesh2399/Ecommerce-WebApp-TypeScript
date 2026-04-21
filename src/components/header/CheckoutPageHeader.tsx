@@ -17,7 +17,7 @@ export const CheckoutPageHeader = ({ cart }: Props) => {
 
                 <img
                   className="logo-image"
-                  src="../../public/images/diamond.png"
+                  src="/images/diamond.png"
                   alt="logo"
                 />
               </div>
